@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="logincampus" extends="struts-default">
+		<action name="login" class="loginAction" method="dologinAction">
+			<result name="user">/WEB-INF/jsp/user.jsp</result>
+			<result name="admin">/WEB-INF/jsp/admin.jsp</result>
+			<result name="fault">/WEB-INF/jsp/fail.jsp</result>
+		</action>
+		
+		<action name="log" class="logAction" method="Dolog">
+			<result name="log">/WEB-INF/jsp/log.jsp</result>
+		</action>
+	</package>
+	
+	<package name="usercampus" extends="struts-default">
+		<action name="userInit" class="userAction" method="userInitAction">
+			<result name="success">/user_init.jsp</result>
+		</action>
+		<action name="userAdd" class="userAction" method="doInsertAction">
+			<result name="success">/user_init.jsp</result>
+		</action>
+		<action name="user_findByName" class="userAction" method="AjaxAction">
+		</action>
+		<action name="userDelete" class="userAction" method="doDeleteAction">
+			<result name="success">/user_init.jsp</result>
+		</action>
+		<action name="userLoad" class="userAction" method="doLoadAction">
+			<result name="success">/user_load.jsp</result>
+			<result name="falt">/user_init.jsp</result>
+		</action>
+		<action name="userUpdate" class="userAction" method="doUpdateAction">
+			<result name="success">/user_init.jsp</result>
+			<result name="falt">/user_init.jsp</result>
+		</action>
+	</package>
+	
+	<package name="coursecampus" extends="struts-default">
+		<action name="initCourse" class="courseAction" method="doInitCourseAction">
+			<result name="success">/my_course.jsp</result>
+		</action>
+		<action name="chooseCourse" class="courseAction" method="doChooseCourseAction">
+			<result name="success">/my_course.jsp</result>
+		</action>
+		<action name="initAdminCourse" class="courseAction" method="doAdminCourseAction">
+			<result name="success">/my_course.jsp</result>
+		</action>
+		<action name="passCourse" class="courseAction" method="dopassAction">
+			<result name="success">/my_course.jsp</result>
+		</action>
+		<action name="unpassCourse" class="courseAction" method="doUnpassAction">
+			<result name="success">/my_course.jsp</result>
+		</action>
+	</package>
+	
+	<package name="ordercampus" extends="struts-default">
+		<action name="initOrder" class="orderAction" method="doInitOrderAction">
+			<result name="success">/my_order.jsp</result>
+		</action>
+		<action name="submitOrder" class="orderAction" method="doChooseOrderAction">
+			<result name="success">/my_order.jsp</result>
+		</action>
+		<action name="cancelOrder" class="orderAction" method="doUnsubscribeAction">
+			<result name="success">/my_order.jsp</result>
+		</action>
+	</package>
+	
+	<package name="relationcampus" extends="struts-default">
+		<action name="initRelation" class="relationAction" method="doInitRelationAction">
+			<result name="success">/my_relation.jsp</result>
+			<result name="fault">/WEB-INF/jsp/fault.jsp</result>
+		</action>
+		<action name="createRelation" class="relationAction" method="docreateRelationAction">
+			<result name="success">/my_relation.jsp</result>
+			<result name="fault">/WEB-INF/jsp/fault.jsp</result>
+		</action>
+		<action name="removeRelation" class="relationAction" method="doremoveRelationAction">
+			<result name="success">/my_relation.jsp</result>
+			<result name="fault">/WEB-INF/jsp/fault.jsp</result>
+		</action>
+	</package>
+	
+</struts>    

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/campus?useUnicode=true&amp;characterEncoding=GBK"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>Coffee/info/dao/UserCourese.hbm.xml</value>
+				<value>Coffee/info/dao/User.hbm.xml</value>
+				<value>Coffee/info/dao/UserOrder.hbm.xml</value>
+				<value>Coffee/info/dao/UserRelation.hbm.xml</value>
+				<value>Coffee/info/dao/UserCertificate.hbm.xml</value>
+				<value>Coffee/info/dao/Log.hbm.xml</value></list>
+		</property></bean>
+	<bean id="UserCoureseDAO" class="Coffee.info.dao.UserCoureseDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO" class="Coffee.info.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserOrderDAO" class="Coffee.info.dao.UserOrderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserRelationDAO"
+		class="Coffee.info.dao.UserRelationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserCertificateDAO"
+		class="Coffee.info.dao.UserCertificateDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LogDAO" class="Coffee.info.dao.LogDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="loginAction" class="Coffee.info.control.LoginAction">
+		<property name="loginServic">
+			<ref bean="loginServic"/>
+		</property>
+	</bean>
+	<bean id="loginServic" class="Coffee.info.service.LoginServic">
+		<property name="dao">
+			<ref bean="UserDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="logAction" class="Coffee.info.control.LogAction">
+		<property name="logServic">
+			<ref bean="logServic"/>
+		</property>
+	</bean>
+	<bean id="logServic" class="Coffee.info.service.LogServic">
+		<property name="logDao">
+			<ref bean="LogDAO"/>
+		</property>
+	</bean>
+	<bean id="userAction" class="Coffee.info.control.UserInitAction">
+		<property name="userInitServic">
+			<ref bean="userServic"/>
+		</property>
+	</bean>
+	<bean id="userServic" class="Coffee.info.service.UserInitServic">
+		<property name="userDAO">
+			<ref bean="UserDAO"/>
+		</property>
+	</bean>
+	<bean id="courseAction" class="Coffee.info.control.CourseAction">
+		<property name="courseSerivce">
+			<ref bean="courseSerivce"/>
+		</property>
+	</bean>
+	<bean id="courseSerivce" class="Coffee.info.service.CourseService">
+		<property name="ucd">
+			<ref bean="UserCoureseDAO"/>
+		</property>
+	</bean>
+	<bean id="orderAction" class="Coffee.info.control.OrderAction">
+		<property name="orderService">
+			<ref bean="orderService"/>
+		</property>
+	</bean>
+	<bean id="orderService" class="Coffee.info.service.OrderService">
+		<property name="uod">
+			<ref bean="UserOrderDAO"/>
+		</property>
+	</bean>
+	<bean id="relationAction" class="Coffee.info.control.RelationAction">
+		<property name="relationService">
+			<ref bean="relationService"/>
+		</property>
+	</bean>
+	<bean id="relationService" class="Coffee.info.service.RelationService">
+		<property name="urd">
+			<ref bean="UserRelationDAO"/>
+		</property>
+		<property name="ud">
+			<ref bean="UserDAO"/>
+		</property>
+	</bean>
+	</beans>
